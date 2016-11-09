@@ -200,19 +200,20 @@ export default Ember.Component.extend(InboundActions, EmberJstreeActions, {
             throw new Error('You must pass a valid jsTree object to set up its event handlers');
         }
 
-        /*
-          Event: init.jstree
-          Action: eventDidInit
-          triggered after all events are bound
-        */
-        treeObject.on('init.jstree', () => {
-            Ember.run(this, function() {
-                if (this.get('isDestroyed') || this.get('isDestroying')) {
-                    return;
-                }
-                this.sendAction('eventDidInit');
-            });
+      /*
+       Event: init.jstree
+       Action: eventDidInit
+       triggered after all events are bound
+       */
+      treeObject.on('init.jstree', () => {
+        Ember.run(this, function() {
+          if (this.get('isDestroyed') || this.get('isDestroying')) {
+            return;
+          }
+          this.sendAction('eventDidInit');
+
         });
+      });
 
         /*
           Event: ready.jstree
@@ -226,6 +227,13 @@ export default Ember.Component.extend(InboundActions, EmberJstreeActions, {
                 }
                 this.set('isReady', true);
                 this.sendAction('eventDidBecomeReady');
+
+              if (this.get('selectedNodes')) {
+                let tree = this.getTree();
+                let selected = [];
+                this.get('selectedNodes').map((v) => selected.push(v.id));
+                tree.select_node(selected);
+              }
             });
         });
 
@@ -287,7 +295,7 @@ export default Ember.Component.extend(InboundActions, EmberJstreeActions, {
 
         /*
           Event: deselect_node.jstree
-          Action: eventDidDeelectNode
+          Action: eventDidDeselectNode
           triggered when an node is deselected
         */
         treeObject.on('deselect_node.jstree', (event, data) => {
@@ -385,6 +393,27 @@ export default Ember.Component.extend(InboundActions, EmberJstreeActions, {
             });
         });
     },
+
+    /**
+    * Refreshes the selected nodes in the tree
+    *
+    * @method _refreshSelected
+    */
+    _refreshSelected: Ember.observer('selectedNodes', function() {
+        console.log('selection changed!');
+        let tree = this.getTree();
+        if (null !== tree && false !== tree) {
+            tree.settings.core['selectedNodes'] = this.get('selectedNodes');
+            let selected = [];
+            this.get('selectedNodes').map((v) => selected.push(v.id));
+            tree.select_node(selected);
+        } else {
+            // setup again if destroyed
+            let treeObject = this._setupJsTree();
+            this._setupEventHandlers(treeObject);
+            this.set('treeObject', treeObject);
+        }
+    }),
 
     /**
      * Refreshes the data in the tree
