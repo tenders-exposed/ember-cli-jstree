@@ -7,18 +7,24 @@ body, html
 .info
 {
 	line-height: 1.2em;
-    position: absolute;
-    top: 60px;
-    left: 400px;
-    padding-left: 20px;
-    border-left: 1px solid #ccc;
+	padding-left: 20px;
+	border-top: 1px solid #ccc;
+	padding-top: 30px;
+    margin-top: 30px;
+}
+
+@media (min-width: 1160px) {
+	.info
+	{
+		border-left: 1px solid #ccc;
+		border-top: none;
+		margin-top: 0px;
+		padding-top: 0px;	    
+	}
 }
 
 .sample-tree
 {
-	position: absolute;
-	top: 100px;
-	left: 25px;
 	margin-right: 25px;
 	width: 350px;
 }
@@ -41,4 +47,19 @@ body, html
 	padding: 10px;
 	border: 1px solid #ccc;
 	word-wrap: break-word;
+}
+
+.example-header {
+	margin-top:0px;
+	margin-bottom: 20px;
+}
+
+.title-header {
+    background-color: #159957;
+    background-image: linear-gradient(120deg, #155799, #159957);
+    color: #fff;
+}
+
+.title-header h1 {
+	text-align:center;
 }

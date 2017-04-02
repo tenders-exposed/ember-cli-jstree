@@ -1,10 +1,10 @@
 # ember-cli-jstree
 
-[![Travis-CI status](https://travis-ci.org/yectep/ember-cli-jstree.svg?branch=master)](https://travis-ci.org/yectep/ember-cli-jstree) [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-jstree.svg)](http://emberobserver.com/addons/ember-cli-jstree)
+[![Travis-CI status](https://travis-ci.org/ritesh83/ember-cli-jstree.svg?branch=master)](https://travis-ci.org/ritesh83/ember-cli-jstree) [![Ember Observer Score](http://emberobserver.com/badges/ember-cli-jstree.svg)](http://emberobserver.com/addons/ember-cli-jstree)
 
 Brings [jsTree](http://www.jstree.com/) functionality into your Ember app.
 
-> Version 0.1.0 of this addon or greater has support for Ember-CLI 1.13 and has **prototype extensions disabled**.
+Demo: http://ritesh83.github.io/ember-cli-jstree/#/static
 
 ## Installation
 
@@ -228,6 +228,8 @@ actionGetNode: function (node) {
 ````
 
 ## Demo
+
+http://ritesh83.github.io/ember-cli-jstree/#/static
 
 Both dynamic (AJAX loaded) and static examples are in the dummy demo.
 
